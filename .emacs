@@ -25,12 +25,17 @@
 (setq-default truncate-lines -1)
 
 (global-linum-mode 1)
-(setq linum-format "%4d \u2502 ")
+(setq linum-format "%4d \u2503 ")
 
 ;; Spaces > Tabs
 (setq c-basic-indent 2)
 (setq tab-width 4)
 (setq indent-tabs-mode nil)
+
+(require 'hlinum)
+(hlinum-activate)
+
+(global-hl-todo-mode)
 
 ;; WINDOW
 (when (fboundp 'windmove-default-keybindings)
@@ -69,10 +74,19 @@
 (setq make-backup-files nil) ; stop creating backup~ files
 (setq auto-save-default nil) ; stop creating #autosave# files
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (grizzl git-gutter doom-themes toml-mode toml all-the-icons projectile neotree racer company))))
-(custom-set-faces)
+    (markdown-mode auto-complete-c-headers go-mode minimap sublimity multiple-cursors hl-todo hlinum grizzl git-gutter doom-themes toml-mode toml all-the-icons projectile neotree racer company))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 
 
 
@@ -95,3 +109,48 @@
 
 ;; TOML
 (require 'toml-mode)
+
+;; CUSTOM
+
+(defun duplicate-current-line-or-region (arg)
+  "Duplicates the current line or region ARG times.
+If there's no region, the current line will be duplicated. However, if
+there's a region, all lines that region covers will be duplicated."
+  (interactive "p")
+  (let (beg end (origin (point)))
+    (if (and mark-active (> (point) (mark)))
+        (exchange-point-and-mark))
+    (setq beg (line-beginning-position))
+    (if mark-active
+        (exchange-point-and-mark))
+    (setq end (line-end-position))
+    (let ((region (buffer-substring-no-properties beg end)))
+      (dotimes (i arg)
+        (goto-char end)
+        (newline)
+        (insert region)
+        (setq end (point)))
+      (goto-char (+ origin (* (length region) arg) arg)))))
+
+(global-set-key (kbd "C-c d") 'duplicate-current-line-or-region)
+
+(defun move-line-up ()
+  "Move up the current line."
+  (interactive)
+  (transpose-lines 1)
+  (forward-line -2)
+  (indent-according-to-mode))
+
+(defun move-line-down ()
+  "Move down the current line."
+  (interactive)
+  (forward-line 1)
+  (transpose-lines 1)
+  (forward-line -1)
+  (indent-according-to-mode))
+
+(global-set-key (kbd "S-<up>")  'move-line-up)
+(global-set-key (kbd "S-<down>")  'move-line-down)
+(global-set-key (kbd "C-z")  'undo)
+(global-set-key (kbd "C-S-s") 'save-buffer)
+

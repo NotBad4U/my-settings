@@ -80,7 +80,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (markdown-mode auto-complete-c-headers go-mode minimap sublimity multiple-cursors hl-todo hlinum grizzl git-gutter doom-themes toml-mode toml all-the-icons projectile neotree racer company))))
+    (dumb-jump airline-themes powerline markdown-mode auto-complete-c-headers go-mode minimap sublimity multiple-cursors hl-todo hlinum grizzl git-gutter doom-themes toml-mode toml all-the-icons projectile neotree racer company))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -154,3 +154,7 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key (kbd "C-z")  'undo)
 (global-set-key (kbd "C-S-s") 'save-buffer)
 
+(require 'powerline)
+(powerline-default-theme)
+
+(dumb-jump-mode)

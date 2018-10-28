@@ -1,0 +1,67 @@
+[user]
+    email = lightplay8@gmail.com
+    name = Alessio Coltellacci
+
+[alias]
+    st = status
+    ci = commit
+    lg = log --graph --date=relative --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %G? %s %Cgreen(%an %ad)%Creset'
+    amend = commit --amend --no-edit
+    review-local = "!git lg @{push}.."
+    # Or pre 2.5, as we didn't differential push and upstream in shorthands:
+    # review-local = lg @{upstream}..
+       prev = checkout HEAD^1
+       next = "!sh -c 'git log --reverse --pretty=%H master | awk \"/$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"    
+    pe = format-patch -M -C --find-copies-harder --stdout
+[diff]
+    # Use better, descriptive initials (c, i, w) instead of a/b.
+    mnemonicPrefix = true
+    # Show renames/moves as such
+    renames = true
+    # When using --word-diff, assume --word-diff-regex=.
+    wordRegex = .
+    # Display submodule-related information (commit listings)
+    submodule = log
+[grep]
+    # Consider most regexes to be ERE
+    extendedRegexp = true
+[log]
+    # Use abbrev SHAs whenever possible/relevant instead of full 40 chars
+    abbrevCommit = true
+    # Automatically --follow when given a single path
+    follow = true
+[status]
+    # Display submodule rev change summaries in status
+    submoduleSummary = true
+    # Recursively traverse untracked directories to display all contents
+    showUntrackedFiles = all
+[merge]
+    # Display common-ancestor blocks in conflict hunks
+    conflictStyle = diff3
+[mergetool]
+    # Clean up backup files created by merge tools on tool exit
+    keepBackup = false
+    # Clean up temp files created by merge tools on tool exit
+    keepTemporaries = false
+    # Put the temp files in a dedicated dir anyway
+    writeToTemp = true
+    # Auto-accept file prompts when launching merge tools
+    prompt = false
+[pull]
+    # This is GREAT… when you know what you're doing and are careful
+    # not to pull --no-rebase over a local line containing a true merge.
+    # rebase = true
+    # WARNING! This option, which does away with the one gotcha of
+    # auto-rebasing on pulls, is only available from 1.8.5 onwards.
+    rebase = preserve
+[push]
+    # Default push should only push the current branch to its push target, regardless of its remote name
+    default = upstream
+    # When pushing, also push tags whose commit-ishs are now reachable upstream
+    followTags = true
+[rerere]
+    # If, like me, you like rerere, uncomment these
+    autoupdate = true
+    enabled = true
+[credential]
+    helper = cache --timeout=3600

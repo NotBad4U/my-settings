@@ -1,0 +1,36 @@
+[profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d]
+foreground-color='#EEEEEC'
+visible-name='escanor'
+palette=['#5B198B', '#BF616A', '#A3BE8C', '#EBCB8B', '#F2158E', '#B48EAD', '#88C0D0', '#E5E9F0', '#8E177C', '#BF616A', '#A3BE8C', '#FCE04F', '#C6168D', '#B48EAD', '#8FBCBB', '#ECEFF4']
+badge-color-set=false
+use-system-font=false
+cursor-colors-set=false
+highlight-colors-set=false
+use-theme-colors=false
+bold-color-set=false
+font='Monospace 15'
+terminal-title='${id}: ${title}'
+background-color='#2E3440'
+background-transparency-percent=0
+dim-transparency-percent=0
+scrollback-lines=20000
+
+[/]
+prompt-on-close=true
+copy-on-select=true
+auto-hide-mouse=false
+terminal-title-style='none'
+theme-variant='dark'
+control-scroll-zoom=false
+warn-vte-config-issue=false
+focus-follow-mouse=true
+window-style='normal'
+
+[keybindings]
+win-switch-to-previous-session='<Primary><Shift>Left'
+terminal-close='<Primary>w'
+app-new-session='<Primary>n'
+app-new-window='<Primary><Shift>t'
+nautilus-open='F12'
+session-close='disabled'
+win-switch-to-next-session='<Primary><Shift>Right'

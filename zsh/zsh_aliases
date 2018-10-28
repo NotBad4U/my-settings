@@ -1,0 +1,32 @@
+alias c='clear'
+alias e='exit'
+## get rid of command not found ##
+alias cd..='cd ..'
+
+alias gs='git st'
+alias gc='git clone'
+alias ga='git add'
+alias gap='git add -p'
+alias gm='git ci -m'
+alias gg='git grep'
+
+## a quick way to get out of current directory ##
+alias ..='cd ..'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+alias .....='cd ../../../../'
+
+alias mount='mount |column -t'
+
+# handy short cuts #
+alias h='history'
+
+alias ports='netstat -tulanp'
+
+alias meminfo='free -m -l -t'
+alias cpuinfo='lscpu'
+alias ccat='pygmentize'
+
+alias docker='sudo docker'
+
+alias emacs='emacs -nw'

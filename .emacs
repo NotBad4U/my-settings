@@ -28,8 +28,8 @@
 (setq linum-format "%4d \u2503 ")
 
 ;; Spaces > Tabs
-(setq c-basic-indent 2)
-(setq tab-width 4)
+(setq c-basic-offset 4)
+(setq-default tab-width 10)
 (setq indent-tabs-mode nil)
 
 (require 'hlinum)
@@ -61,14 +61,22 @@
 (global-set-key (kbd "C-b") 'neotree-toggle)
 (setq neo-theme 'icons)
 
+;; Auto Pairs
+(setq skeleton-pair t)
+  (global-set-key "(" 'skeleton-pair-insert-maybe)
+  (global-set-key "[" 'skeleton-pair-insert-maybe)
+  (global-set-key "{" 'skeleton-pair-insert-maybe)
+  (global-set-key "<" 'skeleton-pair-insert-maybe)
+  (global-set-key "\"" 'skeleton-pair-insert-maybe)
+  (global-set-key "'" 'skeleton-pair-insert-maybe)
+
 ;; THEMES ==============================================
 
 ;; NORD
 (add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/themes/"))
 (load-theme 'nord t)
 (setq nord-comment-brightness 15)
-
-
+;;(load-theme 'rebecca t)
 
 ;; EMACS SETTINGS =====================================
 (setq make-backup-files nil) ; stop creating backup~ files
@@ -78,9 +86,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("b06e5e671032cb2d215e502bd88a5e4c6aa9f5b992bd8738800052a13df9e45c" "72a097f48e588eaa08b17027ac20304dd3b3ea8ceaca4ca553fb2577b64f4d09" default)))
  '(package-selected-packages
    (quote
-    (dumb-jump airline-themes powerline markdown-mode auto-complete-c-headers go-mode minimap sublimity multiple-cursors hl-todo hlinum grizzl git-gutter doom-themes toml-mode toml all-the-icons projectile neotree racer company))))
+    (typescript-mode company-tern dockerfile-mode docker heroku-theme rebecca-theme dumb-jump airline-themes powerline markdown-mode auto-complete-c-headers go-mode minimap sublimity multiple-cursors hl-todo hlinum grizzl git-gutter doom-themes toml-mode toml all-the-icons projectile neotree racer company))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -154,7 +165,28 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key (kbd "C-z")  'undo)
 (global-set-key (kbd "C-S-s") 'save-buffer)
 
+
 (require 'powerline)
 (powerline-default-theme)
 
 (dumb-jump-mode)
+
+(add-to-list 'load-path "/your/path/to/dockerfile-mode/")
+(require 'dockerfile-mode)
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
+
+
+;; Utilities
+(show-paren-mode 1)
+
+(require 'company)
+(require 'company-tern)
+
+(add-to-list 'company-backends 'company-tern)
+(add-hook 'js2-mode-hook (lambda ()
+                           (tern-mode)
+                           (company-mode)))
+
+(add-to-list 'load-path "~/.emacs.d/ambienttalk/")
+(load "ambienttalk")
+(setq auto-mode-alist (cons '("??.at" . at-mode) auto-mode-alist))

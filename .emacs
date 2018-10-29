@@ -50,7 +50,9 @@
 (global-set-key (kbd "M-r") 'split-window-right)
 
 ;; PROJECTILE
-(projectile-mode t)
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (setq projectile-completion-system 'grizzl)
 
 ;; ICONS
@@ -91,7 +93,7 @@
     ("b06e5e671032cb2d215e502bd88a5e4c6aa9f5b992bd8738800052a13df9e45c" "72a097f48e588eaa08b17027ac20304dd3b3ea8ceaca4ca553fb2577b64f4d09" default)))
  '(package-selected-packages
    (quote
-    (typescript-mode company-tern dockerfile-mode docker heroku-theme rebecca-theme dumb-jump airline-themes powerline markdown-mode auto-complete-c-headers go-mode minimap sublimity multiple-cursors hl-todo hlinum grizzl git-gutter doom-themes toml-mode toml all-the-icons projectile neotree racer company))))
+    (helm yaml-mode ponylang-mode ## typescript-mode company-tern dockerfile-mode docker heroku-theme rebecca-theme dumb-jump airline-themes powerline markdown-mode auto-complete-c-headers go-mode minimap sublimity multiple-cursors hl-todo hlinum grizzl git-gutter doom-themes toml-mode toml all-the-icons projectile neotree racer company))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
